@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import POKEMONS from "../models/mock-pokemon"; // Liste de Pokémon
 import Pokemon from "../models/pokemons.ts";
 import formatDate from "../helpers/formatDate"; // Format pour la date
 import formatType from "../helpers/formatType"; // Fonction pour formater les types
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 const PokemonDetail = () => {
   const { id } = useParams<{ id: string }>(); // Récupère l'ID du Pokémon depuis l'URL
@@ -33,11 +35,9 @@ const PokemonDetail = () => {
     <div className="container mx-auto px-4 py-6">
       <div className="flex justify-center">
         <div className="bg-white shadow-lg rounded-lg max-w-3xl w-full">
-          <h2 className="text-3xl font-bold text-center py-4">
-            {pokemon.name}
-          </h2>
           <div className="card">
-            <div className="card-image flex justify-center py-4">
+            <div className="card-image flex justify-center items-center py-4">
+              {/* Image du Pokémon */}
               <img
                 src={pokemon.picture}
                 alt={pokemon.name}
@@ -45,11 +45,27 @@ const PokemonDetail = () => {
               />
             </div>
             <div className="card-content p-4">
+              <h2 className="text-3xl font-bold text-center py-4">
+                {pokemon.name}
+              </h2>
               <table className="min-w-full border-collapse text-sm">
                 <tbody>
                   <tr className="border-b">
                     <td className="font-semibold py-2 px-4">Nom</td>
-                    <td className="py-2 px-4">{pokemon.name}</td>
+                    <td className="py-2 px-4 flex items-center">
+                      {pokemon.name}
+                      {/* Lien vers la page d'édition avec l'icône de crayon */}
+                      <Link
+                        to={`/pokemons/edit/${pokemon.id}`}
+                        className="ml-11 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full"
+                        title="Éditer le Pokémon"
+                      >
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          className="text-white text-lg"
+                        />
+                      </Link>
+                    </td>
                   </tr>
                   <tr className="border-b">
                     <td className="font-semibold py-2 px-4">Points de vie</td>
