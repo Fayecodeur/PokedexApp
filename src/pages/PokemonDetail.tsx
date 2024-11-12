@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import POKEMONS from "../models/mock-pokemon"; // Liste de Pokémon
 import Pokemon from "../models/pokemons.ts";
 import formatDate from "../helpers/formatDate"; // Format pour la date
 import formatType from "../helpers/formatType"; // Fonction pour formater les types
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 const PokemonDetail = () => {
   const { id } = useParams<{ id: string }>(); // Récupère l'ID du Pokémon depuis l'URL
@@ -54,17 +52,6 @@ const PokemonDetail = () => {
                     <td className="font-semibold py-2 px-4">Nom</td>
                     <td className="py-2 px-4 flex items-center">
                       {pokemon.name}
-                      {/* Lien vers la page d'édition avec l'icône de crayon */}
-                      <Link
-                        to={`/pokemons/edit/${pokemon.id}`}
-                        className="ml-11 bg-green-500 hover:bg-green-600 text-white p-2 rounded-full"
-                        title="Éditer le Pokémon"
-                      >
-                        <FontAwesomeIcon
-                          icon={faPen}
-                          className="text-white text-lg"
-                        />
-                      </Link>
                     </td>
                   </tr>
                   <tr className="border-b">
